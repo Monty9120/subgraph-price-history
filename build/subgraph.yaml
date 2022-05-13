@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Factory
@@ -13,7 +13,7 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: ./src/mappings/factory.ts
+      file: Factory/Factory.wasm
       entities:
         - Token
         - DexAmmProtocol
@@ -24,15 +24,15 @@ dataSources:
         - _LiquidityPoolAmount
       abis:
         - name: Factory
-          file: ./abis/factory.json
+          file: Factory/abis/factory.json
         - name: ERC20
-          file: ./abis/ERC20.json
+          file: Factory/abis/ERC20.json
         - name: ERC20SymbolBytes
-          file: ./abis/ERC20SymbolBytes.json
+          file: Factory/abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
-          file: ./abis/ERC20NameBytes.json
+          file: Factory/abis/ERC20NameBytes.json
         - name: Pool
-          file: ./abis/pool.json
+          file: Factory/abis/pool.json
       eventHandlers:
         - event: PoolCreated(indexed address,indexed address,indexed uint24,int24,address)
           handler: handlePoolCreated
@@ -46,7 +46,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: ./src/mappings/core.ts
+      file: templates/Pool/Pool.wasm
       entities:
         - LiqudityPool
         - Token
@@ -66,11 +66,11 @@ templates:
         - _LiquidityPoolAmount
       abis:
         - name: Pool
-          file: ./abis/pool.json
+          file: Pool/abis/pool.json
         - name: Factory
-          file: ./abis/factory.json
+          file: Pool/abis/factory.json
         - name: ERC20
-          file: ./abis/ERC20.json
+          file: Pool/abis/ERC20.json
       eventHandlers:
         - event: Initialize(uint160,int24)
           handler: handleInitialize
