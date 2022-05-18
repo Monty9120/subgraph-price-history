@@ -1,27 +1,24 @@
 specVersion: 0.0.2
+description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
+repository: https://github.com/Uniswap/uniswap-v3-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: optimism
+    network: mainnet
     source:
-      address: "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+      address: '0x1F98431c8aD98523631AE4a59f267346ea31F984'
       abi: Factory
-      startBlock: 0
+      startBlock: 12369621
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/factory.ts
+      file: ./src/uniswapMappings/uniswapPoolFactory.ts
       entities:
+        - Pool
         - Token
-        - DexAmmProtocol
-        - LiquidityPool
-        - Protocol
-        - _PricesUSD
-        - _TokenTracker
-        - _LiquidityPoolAmount
       abis:
         - name: Factory
           file: ./abis/factory.json
@@ -39,31 +36,17 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pool
-    network: optimism
+    network: mainnet
     source:
       abi: Pool
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
-      file: ./src/mappings/core.ts
+      file: ./src/uniswapMappings/uniswapPools.ts
       entities:
-        - LiqudityPool
+        - Pool
         - Token
-        - Deposit
-        - Withdraw
-        - Swap
-        - LiquidityPool
-        - DexAmmProtocol
-        - Token
-        - UsageMetricsDailySnapshot
-        - FinancialsDailySnapshot
-        - PoolDailySnapshot
-        - _PricesUSD
-        - _Account
-        - _DailyActiveAccount
-        - _TokenTracker
-        - _LiquidityPoolAmount
       abis:
         - name: Pool
           file: ./abis/pool.json
@@ -74,8 +57,6 @@ templates:
       eventHandlers:
         - event: Initialize(uint160,int24)
           handler: handleInitialize
-        - event: SetFeeProtocol(uint8,uint8,uint8,uint8)
-          handler: handleSetFeeProtocol
         - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
           handler: handleSwap
         - event: Mint(address,indexed address,indexed int24,indexed int24,uint128,uint256,uint256)
