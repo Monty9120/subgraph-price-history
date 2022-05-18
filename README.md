@@ -1,4 +1,3 @@
-# Uniswap V3 token prices Subgraph
+# Uniswap V3 token history prices Subgraph
 
-### This is a croped version of uniswap v3 subgraph created to pick token prices estimation
-
+Attempting to create a price history of UniSwap tokens.
