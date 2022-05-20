@@ -139,7 +139,7 @@ export function handleSwap(event: SwapEvent): void {
       // }
 
       // Update the pool with the new active liquidity, price, and tick.
-      if (pool) {
+      if (pool && amount0 && amount1) {
         pool.liquidity = event.params.liquidity
         pool.tick = BigInt.fromI32(event.params.tick as i32)
         pool.totalValueLockedToken0 = pool.totalValueLockedToken0.plus(amount0)
