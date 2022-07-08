@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import { ONE_BD, ZERO_BD, ZERO_BI } from './constants'
 import { Bundle, UniswapPool, Token } from './../../generated/schema'
-import { BigDecimal, BigInt } from '@graphprotocol/graph-ts'
+import { BigDecimal, BigInt, log } from '@graphprotocol/graph-ts'
 import { exponentToBigDecimal, safeDiv } from '../utils/index'
 
 const WETH_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
@@ -44,16 +44,26 @@ let STABLE_COINS: string[] = [
 let MINIMUM_ETH_LOCKED = BigDecimal.fromString('52')
 
 let Q192 = 2 ** 192
+
+
 export function sqrtPriceX96ToTokenPrices(sqrtPriceX96: BigInt, token0: Token, token1: Token): BigDecimal[] {
   let num = sqrtPriceX96.times(sqrtPriceX96).toBigDecimal()
-  let denom = BigDecimal.fromString(Q192.toString())
-  let price1 = num
-    .div(denom)
-    .times(exponentToBigDecimal(token0.decimals))
-    .div(exponentToBigDecimal(token1.decimals))
 
-  let price0 = safeDiv(BigDecimal.fromString('1'), price1)
-  return [price0, price1]
+  let denom = BigDecimal.fromString(Q192.toString())
+
+  if (denom.equals(ZERO_BD)) {
+    return [safeDiv(BigDecimal.fromString('1'), BigDecimal.fromString('1')), safeDiv(BigDecimal.fromString('1'), BigDecimal.fromString('1'))]
+  } else {
+    let price1 = num
+      .div(denom)
+      .times(exponentToBigDecimal(token0.decimals))
+      .div(exponentToBigDecimal(token1.decimals))
+    let price0 = safeDiv(BigDecimal.fromString('1'), price1)
+    return [price0, price1]
+  }
+
+
+
 }
 
 export function getEthPriceInUSD(): BigDecimal {

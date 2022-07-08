@@ -12,7 +12,7 @@ export function handlePoolCreated(event: PoolCreated): void {
   if (event.params.pool == Address.fromHexString('0x8fe8d9bb8eeba3ed688069c3d6b556c9ca258248')) {
     return
   }
-
+  log.debug('made it past line 15', [])
   let bundle = Bundle.load('1')
   if (bundle && bundle === null) {
     // create new bundle for tracking eth price
@@ -20,6 +20,9 @@ export function handlePoolCreated(event: PoolCreated): void {
     bundle.ethPriceUSD = ZERO_BD
     bundle.save()
   }
+
+  log.debug('made it past line 24', [])
+
 
   let pool = new UniswapPool(event.params.pool.toHexString()) as UniswapPool
   let token0 = Token.load(event.params.token0.toHexString())
@@ -57,7 +60,7 @@ export function handlePoolCreated(event: PoolCreated): void {
     token1.derivedETH = ZERO_BD
     token1.allowedPools = []
   }
-
+  log.debug('made it to line 63', [])
   // update white listed pools
   if (ALLOWED_TOKENS.includes(token0.id)) {
     let newPools = token1.allowedPools

@@ -22,7 +22,7 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
       } else {
         // try with the static definition
         let staticTokenDefinition = StaticTokenDefinition.fromAddress(tokenAddress)
-        if(staticTokenDefinition !== null) {
+        if (staticTokenDefinition !== null) {
           symbolValue = staticTokenDefinition.symbol
         }
       }
@@ -49,10 +49,11 @@ export function fetchTokenName(tokenAddress: Address): string {
         nameValue = nameResultBytes.value.toString()
       } else {
         // try with the static definition
-        let staticTokenDefinition = StaticTokenDefinition.fromAddress(tokenAddress)
-        if(staticTokenDefinition !== null) {
-          nameValue = staticTokenDefinition.name
-        }
+        // let staticTokenDefinition = StaticTokenDefinition.fromAddress(tokenAddress)
+        // if (staticTokenDefinition !== null) {
+        //   nameValue = staticTokenDefinition.name
+        // }
+        nameValue = 'dunno'
       }
     }
   } else {
@@ -71,10 +72,13 @@ export function fetchTokenDecimals(tokenAddress: Address): BigInt {
     decimalValue = decimalResult.value
   } else {
     // try with the static definition
-    let staticTokenDefinition = StaticTokenDefinition.fromAddress(tokenAddress)
-    if(staticTokenDefinition !== null) {
-      return staticTokenDefinition.decimals
-    }
+    // let staticTokenDefinition = StaticTokenDefinition.fromAddress(tokenAddress)
+    // if (staticTokenDefinition !== null) {
+    //   return staticTokenDefinition.decimals
+    // }
+
+
+    decimalValue = 0
   }
 
   return BigInt.fromI32(decimalValue as i32)

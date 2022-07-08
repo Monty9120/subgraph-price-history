@@ -1,0 +1,5 @@
+sources:
+  - name: UniSwap Price
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/10139/uniswap-price/0.22

@@ -9,6 +9,7 @@
         "deploy": "graph deploy gabrielcamba/something --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
     },
     "devDependencies": {
+        "@graphprotocol/client-cli": "^2.0.0",
         "@graphprotocol/graph-cli": "^0.28.0",
         "@graphprotocol/graph-ts": "^0.26.0",
         "@typescript-eslint/eslint-plugin": "^2.0.0",

@@ -40,3 +40,11 @@ type UniswapPool @entity {
   # total token 1 across all ticks
   totalValueLockedToken1: BigDecimal!
 }
+
+
+type Pair @entity {
+  # pair address
+  id: ID!
+  token0: Token!
+  token1: Token!
+}
