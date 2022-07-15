@@ -1,11 +1,9 @@
 specVersion: 0.0.2
-description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
-repository: https://github.com/Uniswap/uniswap-v3-subgraph
+description: Price history for any token on UniSwap
+repository: https://github.com/Monty9120/subgraph-price-history
 schema:
   file: ./schema.graphql
-graft:
-  base: QmPrb5mvZj3ycUugZgwLWCvK93jfXfhvfjRXrFk4tRmyCX
-  block: 14292820
+
 features:
   - nonFatalErrors
 dataSources:
@@ -67,8 +65,7 @@ dataSources:
           handler: handleIncreaseLiquidity
         - event: DecreaseLiquidity(indexed uint256,uint128,uint256,uint256)
           handler: handleDecreaseLiquidity
-        - event: Collect(indexed uint256,address,uint256,uint256)
-          handler: handleCollect
+
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
 templates:

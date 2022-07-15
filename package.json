@@ -1,17 +1,12 @@
 {
-  "name": "uniswap-v3-subgraph",
+  "name": "uniswap-price",
   "version": "1.0.0",
-  "repository": "https://github.com/graphprotocol/uniswap-v3-subgraph",
+  "repository": "https://github.com/Monty9120/price-history",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
-    "create-local": "graph create ianlapham/uniswap-v3 --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy ianlapham/uniswap-v3 --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "deploy": "graph deploy ianlapham/uniswap-v3-subgraph --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
-    "deploy-dev": "graph deploy sommelier/uniswap-v3 --ipfs http://35.197.14.14:5000/ --node http://35.197.14.14:8020/ --debug",
-    "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /Uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
-    "watch-local": "graph deploy ianlapham/uniswap-v3 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "deploy": "graph deploy --product hosted-service --access-token c08bcc5045f543a6a4af4e3c933ec18c --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ monty9120/price-history"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.20.0",
