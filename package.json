@@ -1,17 +1,16 @@
 {
-    "name": "uniswap-v3-subgraph",
-    "version": "1.0.0",
-    "repository": "https://github.com/graphprotocol/uniswap-v3-subgraph",
+    "name": "price-v2-subgraph",
+    "version": "1.1",
+    "repository": "https://github.com/Monty9120/subgraph-price-history",
     "license": "GPL-3.0-or-later",
     "scripts": {
-        "codegen": "graph codegen",
+        "codegen": "graph codegen --output-dir src/types/",
         "build": "graph build",
-        "deploy": "graph deploy gabrielcamba/something --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
+        "deploy": "graph deploy monty9120/price-history --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
     },
     "devDependencies": {
-        "@graphprotocol/client-cli": "^2.0.0",
-        "@graphprotocol/graph-cli": "^0.28.0",
-        "@graphprotocol/graph-ts": "^0.26.0",
+        "@graphprotocol/graph-cli": "^0.20.0",
+        "@graphprotocol/graph-ts": "^0.20.0",
         "@typescript-eslint/eslint-plugin": "^2.0.0",
         "@typescript-eslint/parser": "^2.0.0",
         "eslint": "^6.2.2",

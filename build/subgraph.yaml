@@ -1,8 +1,13 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
 repository: https://github.com/Monty9120/subgraph-price-history
 schema:
   file: schema.graphql
+graft:
+  base: QmPrb5mvZj3ycUugZgwLWCvK93jfXfhvfjRXrFk4tRmyCX
+  block: 14292820
+features:
+  - nonFatalErrors
 dataSources:
   - kind: ethereum/contract
     name: Factory
@@ -13,7 +18,7 @@ dataSources:
       startBlock: 12369621
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: Factory/Factory.wasm
       entities:
@@ -33,6 +38,39 @@ dataSources:
       eventHandlers:
         - event: PoolCreated(indexed address,indexed address,indexed uint24,int24,address)
           handler: handlePoolCreated
+  - kind: ethereum/contract
+    name: NonfungiblePositionManager
+    network: mainnet
+    source:
+      address: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88"
+      abi: NonfungiblePositionManager
+      startBlock: 12369651
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: NonfungiblePositionManager/NonfungiblePositionManager.wasm
+      entities:
+        - Pool
+        - Token
+      abis:
+        - name: NonfungiblePositionManager
+          file: NonfungiblePositionManager/abis/NonfungiblePositionManager.json
+        - name: Pool
+          file: NonfungiblePositionManager/abis/pool.json
+        - name: Factory
+          file: NonfungiblePositionManager/abis/factory.json
+        - name: ERC20
+          file: NonfungiblePositionManager/abis/ERC20.json
+      eventHandlers:
+        - event: IncreaseLiquidity(indexed uint256,uint128,uint256,uint256)
+          handler: handleIncreaseLiquidity
+        - event: DecreaseLiquidity(indexed uint256,uint128,uint256,uint256)
+          handler: handleDecreaseLiquidity
+        - event: Collect(indexed uint256,address,uint256,uint256)
+          handler: handleCollect
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
 templates:
   - kind: ethereum/contract
     name: Pool
@@ -41,7 +79,7 @@ templates:
       abi: Pool
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: templates/Pool/Pool.wasm
       entities:
@@ -63,3 +101,5 @@ templates:
           handler: handleMint
         - event: Burn(indexed address,indexed int24,indexed int24,uint128,uint256,uint256)
           handler: handleBurn
+        - event: Flash(indexed address,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleFlash
