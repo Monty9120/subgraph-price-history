@@ -9,8 +9,8 @@
         "deploy": "graph deploy monty9120/price-history --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
     },
     "devDependencies": {
-        "@graphprotocol/graph-cli": "^0.39.0",
-        "@graphprotocol/graph-ts": "^0.29.3",
+        "@graphprotocol/graph-cli": "^0.20.0",
+        "@graphprotocol/graph-ts": "^0.20.0",
         "@typescript-eslint/eslint-plugin": "^2.0.0",
         "@typescript-eslint/parser": "^2.0.0",
         "eslint": "^6.2.2",
