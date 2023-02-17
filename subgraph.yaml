@@ -1,11 +1,8 @@
-specVersion: 0.0.4
+specVersion: 0.0.5
 description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
 repository: https://github.com/Monty9120/subgraph-price-history
 schema:
     file: ./schema.graphql
-graft:
-    base: QmPrb5mvZj3ycUugZgwLWCvK93jfXfhvfjRXrFk4tRmyCX
-    block: 14292820
 features:
     - nonFatalErrors
 dataSources:

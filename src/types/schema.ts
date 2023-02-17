@@ -496,10 +496,10 @@ export class Pool extends Entity {
 
   get tick(): BigInt | null {
     let value = this.get("tick");
-    if (value === null || value!.kind == ValueKind.NULL) {
+    if (value === null || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value!.toBigInt();
+      return value.toBigInt();
     }
   }
 

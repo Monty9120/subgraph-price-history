@@ -28,7 +28,7 @@ export function handleInitialize(event: Initialize): void {
   pool!.sqrtPrice = event.params.sqrtPriceX96
   pool!.tick = BigInt.fromI32(event.params.tick)
   pool!.save()
-  
+
   // update token prices
   let token0 = Token.load(pool!.token0)
   let token1 = Token.load(pool!.token1)
@@ -105,7 +105,7 @@ export function handleMint(event: MintEvent): void {
 
   let transaction = loadTransaction(event)
   let mint = new Mint(transaction.id.toString() + '#' + pool!.txCount.toString())
-  mint.transaction = transaction.id
+  mint.transaction = transaction.id 
   mint.timestamp = transaction.timestamp
   mint.pool = pool!.id
   mint.token0 = pool!.token0
@@ -163,8 +163,8 @@ export function handleMint(event: MintEvent): void {
   mint.save()
 
   // Update inner tick vars and save the ticks
-  updateTickFeeVarsAndSave(lowerTick!, event)
-  updateTickFeeVarsAndSave(upperTick!, event)
+  updateTickFeeVarsAndSave(lowerTick, event)
+  updateTickFeeVarsAndSave(upperTick, event)
 }
 
 export function handleBurn(event: BurnEvent): void {
@@ -515,7 +515,7 @@ function updateTickFeeVarsAndSave(tick: Tick, event: ethereum.Event): void {
   tick.feeGrowthOutside1X128 = tickResult.value3
   tick.save()
 
-  updateTickDayData(tick!, event)
+  updateTickDayData(tick, event)
 }
 
 function loadTickUpdateFeeVarsAndSave(tickId: i32, event: ethereum.Event): void {
@@ -527,6 +527,6 @@ function loadTickUpdateFeeVarsAndSave(tickId: i32, event: ethereum.Event): void 
       .concat(tickId.toString())
   )
   if (tick !== null) {
-    updateTickFeeVarsAndSave(tick!, event)
+    updateTickFeeVarsAndSave(tick, event)
   }
 }
