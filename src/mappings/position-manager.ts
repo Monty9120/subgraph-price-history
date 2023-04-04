@@ -8,7 +8,7 @@ import {
 } from '../types/NonfungiblePositionManager/NonfungiblePositionManager'
 import { Bundle, Position, PositionSnapshot, Token } from '../types/schema'
 import { ADDRESS_ZERO, factoryContract, ZERO_BD, ZERO_BI } from '../utils/constants'
-import { Address, BigInt, ethereum } from '@graphprotocol/graph-ts'
+import { Address, BigInt, ethereum, log } from '@graphprotocol/graph-ts'
 import { convertTokenToDecimal, loadTransaction } from '../utils'
 
 function getPosition(event: ethereum.Event, tokenId: BigInt): Position | null {
@@ -168,10 +168,11 @@ export function handleTransfer(event: Transfer): void {
   let position = getPosition(event, event.params.tokenId)
 
   // position was not able to be fetched
-  if (position == null) {
+  if (!position) {
+    log.debug('Position: was null...', [])
     return
   }
-
+  
   position.owner = event.params.to
   position.save()
 

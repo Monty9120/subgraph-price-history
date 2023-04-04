@@ -1,4 +1,4 @@
-specVersion: 0.0.5
+specVersion: 0.0.4
 description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
 repository: https://github.com/Monty9120/subgraph-price-history
 schema:
@@ -15,7 +15,7 @@ dataSources:
       startBlock: 12369621
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: Factory/Factory.wasm
       entities:
@@ -44,7 +44,7 @@ dataSources:
       startBlock: 12369651
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: NonfungiblePositionManager/NonfungiblePositionManager.wasm
       entities:
@@ -76,7 +76,7 @@ templates:
       abi: Pool
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: templates/Pool/Pool.wasm
       entities:

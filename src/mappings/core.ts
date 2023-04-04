@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import { Bundle, Burn, Factory, Mint, Pool, Swap, Tick, Token } from '../types/schema'
 import { Pool as PoolABI } from '../types/Factory/Pool'
-import { BigDecimal, BigInt, ethereum } from '@graphprotocol/graph-ts'
+import { BigDecimal, BigInt, ethereum, log } from '@graphprotocol/graph-ts'
 import {
   Burn as BurnEvent,
   Flash as FlashEvent,
@@ -105,7 +105,7 @@ export function handleMint(event: MintEvent): void {
 
   let transaction = loadTransaction(event)
   let mint = new Mint(transaction.id.toString() + '#' + pool!.txCount.toString())
-  mint.transaction = transaction.id 
+  mint.transaction = transaction.id
   mint.timestamp = transaction.timestamp
   mint.pool = pool!.id
   mint.token0 = pool!.token0
@@ -367,7 +367,7 @@ export function handleSwap(event: SwapEvent): void {
   token1!.derivedETH = findEthPerToken(token1 as Token)
 
   /**
-   * Things afffected by new USD rates
+   * Things affected by new USD rates
    */
   pool!.totalValueLockedETH = pool!.totalValueLockedToken0
     .times(token0!.derivedETH)
