@@ -1,5 +1,5 @@
 sources:
-  - name: UniSwap Price
+  - name: UniSwap Historical Price
     handler:
       graphql:
-        endpoint: https://api.studio.thegraph.com/query/10139/uniswap-price/0.22
+        endpoint: https://api.studio.thegraph.com/query/10139/uniswap-historical-price/0.0.21

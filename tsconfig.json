@@ -1,6 +1,8 @@
 {
-  "extends": "@graphprotocol/graph-ts/tsconfig",
-  "compilerOptions": {
-    "types": ["@graphprotocol/graph-ts"]
-  }
+    "extends": "@graphprotocol/graph-ts/tsconfig",
+    "compilerOptions": {
+        "strictNullChecks": false,
+        "esModuleInterop": true,
+        "types": ["@graphprotocol/graph-ts", "node"]
+    }
 }

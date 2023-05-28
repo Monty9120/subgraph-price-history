@@ -78,11 +78,6 @@ function savePositionSnapshot(position: Position, event: ethereum.Event): void {
 }
 
 export function handleIncreaseLiquidity(event: IncreaseLiquidity): void {
-  // temp fix
-  if (event.block.number.equals(BigInt.fromI32(14317993))) {
-    return
-  }
-
   let position = getPosition(event, event.params.tokenId)
 
   // position was not able to be fetched
@@ -172,7 +167,7 @@ export function handleTransfer(event: Transfer): void {
     log.debug('Position: was null...', [])
     return
   }
-  
+
   position.owner = event.params.to
   position.save()
 

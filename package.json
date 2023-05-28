@@ -1,16 +1,20 @@
 {
-    "name": "price-v2-subgraph",
+    "name": "price-v3-subgraph",
     "version": "1.1",
     "repository": "https://github.com/Monty9120/subgraph-price-history",
     "license": "GPL-3.0-or-later",
     "scripts": {
         "codegen": "graph codegen --output-dir src/types/",
         "build": "graph build",
-        "deploy": "graph deploy monty9120/price-history --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
+        "deploy": "graph deploy monty9120/price-history --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
+        "graphclient-build": "graphclient build",
+        "graphclient-serve": "graphclient serve-dev"
     },
     "devDependencies": {
+        "@graphprotocol/client-cli": "^2.2.20",
         "@graphprotocol/graph-cli": "^0.39.0",
         "@graphprotocol/graph-ts": "^0.29.3",
+        "@types/node": "^18.16.3",
         "@typescript-eslint/eslint-plugin": "^2.0.0",
         "@typescript-eslint/parser": "^2.0.0",
         "eslint": "^6.2.2",
